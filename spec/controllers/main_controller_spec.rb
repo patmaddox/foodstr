@@ -1,10 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe MainController do
-
-  #Delete this example and add some real ones
-  it "should use MainController" do
-    controller.should be_an_instance_of(MainController)
+  describe "home page" do
+    it "should be ok" do
+      get :homepage
+      response.should be_success
+      response.should render_widget(Views::Main::Homepage)
+    end
   end
-
 end
