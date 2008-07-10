@@ -12,3 +12,10 @@ Spec::Runner.configure do |config|
 end
 
 require File.expand_path(File.join(File.dirname(__FILE__), 'matchers', 'render_widget'))
+
+Spec::Rails::Example::RailsExampleGroup.class_eval do
+  def create_user
+    User.create!(:first_name => "Pat", :last_name => "Maddox", :login => "pat",
+                 :email => "pat@patmaddox.com", :password => "password")
+  end
+end

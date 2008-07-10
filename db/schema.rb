@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080710041243) do
+ActiveRecord::Schema.define(:version => 20080710061357) do
+
+  create_table "registrations", :force => true do |t|
+    t.integer  "workshop_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -18,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20080710041243) do
     t.string   "login"
     t.string   "email"
     t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workshops", :force => true do |t|
+    t.string   "name"
+    t.date     "scheduled_date"
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
