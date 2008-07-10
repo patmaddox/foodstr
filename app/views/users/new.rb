@@ -11,6 +11,7 @@ class Views::Users::New < Erector::Widget
       f.text_field :login
       f.text_field :email
       f.password_field :password
+      f.submit_tag "Sign up"
     end
   end
 end

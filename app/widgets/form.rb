@@ -12,8 +12,10 @@ module Widgets
         @object = object
         builder = self
 
-        @canvas.form(:target => '/users', :method => 'post') do
+        @canvas.form(:action => '/users', :method => 'post') do
           block.call(builder)
+          input(:type => :hidden, :name => :authenticity_token,
+                :value => helpers.form_authenticity_token) if helpers.protect_against_forgery?
         end
       end
 
@@ -23,6 +25,10 @@ module Widgets
 
       def password_field(name)
         input_field name, :password
+      end
+
+      def submit_tag(value="Save")
+        @canvas.input :type => :submit, :value => value
       end
 
       private
