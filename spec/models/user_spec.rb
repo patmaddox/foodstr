@@ -22,4 +22,18 @@ describe User do
       u.should have_at_least(1).error_on(field)
     end
   end
+
+  describe "User.authenticate" do
+    before(:each) do
+      @user = User.create!(@valid_attributes)
+    end
+
+    it "should find the user when given matching credentials" do
+      User.authenticate(@user.login, @user.password).should == @user
+    end
+
+    it "should return nil when the credentials don't match a user" do
+      User.authenticate(@user.login, "nope, not my password").should be_nil
+    end
+  end
 end
