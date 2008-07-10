@@ -1,5 +1,5 @@
-class Views::Users::New < Widgets::Workshopr
-  def render
+class Views::Users::New < Views::Layouts::Application
+  def render_body
     h3 "Sign up as a new user"
     p "All fields are required"
 
