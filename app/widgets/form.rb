@@ -30,7 +30,7 @@ module Widgets
         input_field name, :password
       end
 
-      def submit_tag(value="Save")
+      def submit(value="Save")
         @canvas.input :type => :submit, :value => value
       end
 

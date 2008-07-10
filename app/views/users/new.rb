@@ -9,7 +9,7 @@ class Views::Users::New < Widgets::Workshopr
       f.text_field :login
       f.text_field :email
       f.password_field :password
-      f.submit_tag "Sign up"
+      f.submit "Sign up"
     end
   end
 end
