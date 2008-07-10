@@ -2,17 +2,20 @@ module Widgets
   module Form
     def form_for(object_name, &block)
       object = instance_variable_get("@#{object_name}")
-      Widgets::Form::Builder.new(self, object_name, object, &block)
+      Widgets::Form::Builder.new(self, polymorphic_path(object),
+                                 object_name, object, &block)
     end
 
     class Builder
-      def initialize(canvas, object_name, object, &block)
+      def initialize(canvas, action, object_name, object, &block)
         @canvas = canvas
         @object_name = object_name
         @object = object
         builder = self
 
-        @canvas.form(:action => '/users', :method => 'post') do
+        form_options = {:action => action, :method => 'post'}
+        #form_options[:_method] = 'put' if @object.new_record?
+        @canvas.form(form_options) do
           block.call(builder)
           input(:type => :hidden, :name => :authenticity_token,
                 :value => helpers.form_authenticity_token) if helpers.protect_against_forgery?
