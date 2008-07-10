@@ -7,8 +7,7 @@ describe User do
       :last_name => "Maddox",
       :login => "pat_maddox",
       :email => "pat@patmaddox.com",
-      :password => "password",
-      :password_confirmation => "password"
+      :password => "password"
     }
   end
 
@@ -16,7 +15,7 @@ describe User do
     User.new(@valid_attributes).should be_valid
   end
 
-  [:first_name, :last_name, :login, :email].each do |field|
+  [:first_name, :last_name, :login, :email, :password].each do |field|
     it "should require #{field} " do
       u = User.new(@valid_attributes.except(field))
       u.should_not be_valid
