@@ -26,9 +26,9 @@ describe UsersController do
     end
 
     describe "success" do
-      it "should be ok" do
+      it "should redirect to the dashboard" do
         do_post
-        response.should be_success
+        response.should redirect_to(dashboard_url)
       end
 
       it "should create a user" do
@@ -45,6 +45,17 @@ describe UsersController do
       it "should not create a user" do
         lambda { do_post :login => "" }.should_not change(User, :count)
       end
+    end
+  end
+
+  describe "GET /dashboard" do
+    def do_get
+      get :dashboard
+    end
+    
+    it "should redirect to the login screen when not logged in" do
+      do_get
+      response.should redirect_to(login_url)
     end
   end
 end
