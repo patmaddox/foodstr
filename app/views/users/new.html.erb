@@ -1,0 +1,11 @@
+<h3>Sign up as a new user</h3>
+<p>All fields are required</p>
+
+<% form_for :user do |f| %>
+  <%= f.label :first_name %>: <%= f.text_field :first_name %><br/>
+  <%= f.label :last_name %>: <%= f.text_field :last_name %><br/>
+  <%= f.label :login %>: <%= f.text_field :login %><br/>
+  <%= f.label :email %>: <%= f.text_field :email %><br/>
+  <%= f.label :password %>: <%= f.text_field :password %><br/>
+  <%= f.submit "Sign up" %>
+<% end %>

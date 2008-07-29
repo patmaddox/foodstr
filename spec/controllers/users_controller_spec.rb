@@ -13,7 +13,7 @@ describe UsersController do
 
     it "should render the new template" do
       do_get
-      response.should render_widget(Views::Users::New)
+      response.should render_template("new")
     end
   end
 
@@ -39,7 +39,7 @@ describe UsersController do
     describe "failure" do
       it "should render the form again" do
         do_post :login => ""
-        response.should render_widget(Views::Users::New)
+        response.should render_template("new")
       end
 
       it "should not create a user" do

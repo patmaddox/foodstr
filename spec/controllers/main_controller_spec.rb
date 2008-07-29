@@ -5,7 +5,7 @@ describe MainController do
     it "should be ok" do
       get :homepage
       response.should be_success
-      response.should render_widget(Views::Main::Homepage)
+      response.should render_template("homepage")
     end
   end
 end
