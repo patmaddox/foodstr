@@ -1,0 +1,10 @@
+<h1><%= h(@restaurant.name) %></h1>
+
+<div class="address">
+  <%= h(@restaurant.address_street) %><br/>
+  <% unless @restaurant.address_street2.blank? %>
+    <%= h(@restaurant.address_street2) %><br/>
+  <% end %>
+  <%= h(@restaurant.address_city) %>, <%= h(@restaurant.address_state) %>
+  <%= h(@restaurant.address_zip) %>
+</div>

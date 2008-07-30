@@ -18,4 +18,18 @@ Spec::Rails::Example::RailsExampleGroup.class_eval do
     User.create!(:first_name => "Pat", :last_name => "Maddox", :login => "pat",
                  :email => "pat@patmaddox.com", :password => "password")
   end
+
+  def valid_restaurant_attributes
+    {
+      :name => "Lil Frankie's'",
+      :address_street => "11 1st Ave",
+      :address_city => "New York",
+      :address_state => "NY",
+      :address_zip => "10003"
+    }    
+  end
+end
+
+Spec::Rails::Example::ControllerExampleGroup.class_eval do
+  integrate_views
 end

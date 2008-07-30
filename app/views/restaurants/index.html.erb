@@ -1,0 +1,15 @@
+<h1>All Restaurants</h1>
+
+<% @restaurants.each do |r| %>
+  <div class="restaurant">
+    <div class="name"><%= h(r.name) %></div>
+    <div class="address">
+      <%= h(r.address_street) %><br/>
+      <% unless r.address_street2.blank? %>
+        <%= h(r.address_street2) %><br/>
+      <% end %>
+      <%= h(r.address_city) %>, <%= h(r.address_state) %>
+      <%= h(r.address_zip) %>
+    </div>
+  </div>
+<% end %>
