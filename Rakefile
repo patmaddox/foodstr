@@ -8,3 +8,16 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+require 'vlad'
+Vlad.load :scm => :git
+
+namespace :vlad do
+  desc 'Runs vlad:update, vlad:symlink, vlad:migrate and vlad:start'
+  task :deploy => ['vlad:update', 'vlad:symlink', 'vlad:migrate', 'vlad:stop_app', 'vlad:start_app']
+
+  desc 'Symlinks your custom directories'
+  remote_task :symlink, :roles => :app do
+    run "ln -s #{shared_path}/database.yml #{current_release}/config/database.yml"
+  end
+end
