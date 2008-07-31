@@ -2,7 +2,7 @@
 
 <% @restaurants.each do |r| %>
   <div class="restaurant">
-    <div class="name"><%= h(r.name) %></div>
+    <div class="name"><%= link_to h(r.name), restaurant_url(r) %></div>
     <div class="address">
       <%= h(r.address_street) %><br/>
       <% unless r.address_street2.blank? %>
