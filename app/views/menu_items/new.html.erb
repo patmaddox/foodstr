@@ -1,5 +1,7 @@
 <h1>Create a new Menu Item for <%= @restaurant.name %></h1>
 
+<%= error_messages_for :menu_item %>
+
 <% form_for @menu_item, :url => restaurant_menu_item_path(@restaurant, @menu_item) do |f| %>
   <%= f.label :name, "Name:" %>
   <%= f.text_field :name %><br/>
