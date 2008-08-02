@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    !!current_user
+    !current_user.nil?
   end
 
   def authorized?
@@ -30,13 +30,14 @@ class ApplicationController < ActionController::Base
       @_current_user = user
       session[:user_id] = user.id
     else
-      @_current_user = nil
+      @_current_user = NilUser.instance
       session[:user_id] = nil
     end
   end
 
+  helper_method :current_user
   def current_user
-    return if session[:user_id].nil?
+    return NilUser.instance if session[:user_id].nil?
     @_current_user ||= User.find(session[:user_id])
   end
 end
