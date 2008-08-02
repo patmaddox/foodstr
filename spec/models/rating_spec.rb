@@ -31,14 +31,24 @@ describe Rating do
     Rating.new(@valid_attributes.merge(:rating => nil)).should_not be_valid
   end
 
-  it "should only allow a user to create one rating for a menu item" do
-    pat = create_user :login => "pat"
-    sam = create_user :login => "sam", :email => "sam@blah.com"
-    rest = create_restaurant
-    item = MenuItem.create! :name => "pasta carbonara", :restaurant => rest
+  describe "creating ratings" do
+    before(:each) do
+      @pat = create_user :login => "pat"
+      @sam = create_user :login => "sam", :email => "sam@blah.com"
+      @rest = create_restaurant
+      @item = MenuItem.create! :name => "pasta carbonara", :restaurant => @rest
+    end
 
-    Rating.create! :user => pat, :menu_item => item
-    Rating.new(:user => pat, :menu_item => item).should_not be_valid
-    Rating.new(:user => sam, :menu_item => item).should be_valid
+    it "should only allow a user to create one rating for a menu item" do
+      Rating.create! :user => @pat, :menu_item => @item
+      Rating.new(:user => @pat, :menu_item => @item).should_not be_valid
+      Rating.new(:user => @sam, :menu_item => @item).should be_valid
+    end
+
+    it "should update the number of points on the menu item" do
+      Rating.create!(:user => @pat, :menu_item => @item, :rating => 1)
+      Rating.create!(:user => @sam, :menu_item => @item, :rating => 0)
+      @item.reload.points.should == 1
+    end
   end
 end
