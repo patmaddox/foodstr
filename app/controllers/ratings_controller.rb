@@ -3,7 +3,7 @@ class RatingsController < ApplicationController
   before_filter :load_menu_item
 
   def create
-    @rating = @menu_item.ratings.find_by_user_id(current_user.id) ||
+    @rating = @menu_item.ratings.from_user(current_user) ||
       @menu_item.ratings.build(:user => current_user)
     @rating.update_attributes! params[:rating]
     head :ok

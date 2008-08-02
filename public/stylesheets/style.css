@@ -1,4 +1,4 @@
-.flash_success {
+.flash_success, p.success {
     color: green;
 }
 
@@ -16,4 +16,8 @@
 
 #account_links {
     float: right;
+}
+
+.menu_item .feedback {
+    display: none;
 }

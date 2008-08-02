@@ -10,7 +10,27 @@
 </div>
 
 <% @restaurant.menu_items.each do |menu_item| %>
-  <div class="menu_item"><%= menu_item.name %></div>
+  <div id="menu_item_<%= menu_item.id %>" class="menu_item">
+    <%= link_to h(menu_item.name), "#" %>
+
+    <div class="feedback">
+      <p>Leave some feedback!</p>
+      <% if logged_in? %>
+        <% remote_form_for :rating,
+             menu_item.ratings.from_user(current_user),
+             :url => restaurant_menu_item_ratings_path(@restaurant, menu_item),
+             :success => "jQuery('#menu_item_#{menu_item.id} div.feedback').trigger('success')" do |f| %>
+          <%= f.label :comment, "Comment:" %><br/>
+          <%= f.text_area :comment, :rows => 5 %><br/>
+          Mmmmmm! <%= f.radio_button :rating, 1 %>
+          Blech! <%= f.radio_button :rating, -1 %><br/>
+          <%= f.submit "Leave comment" %>
+        <% end %>
+      <% else %>
+        You must <%= link_to "log in", login_url %> in order to leave feedback.
+      <% end %>
+</div>
+  </div>
 <% end %>
 
 <% if current_user.can_create_menu_items? %>
