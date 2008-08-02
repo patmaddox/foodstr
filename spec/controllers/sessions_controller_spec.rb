@@ -17,6 +17,7 @@ describe SessionsController do
     it "should redirect to the dashboard on success" do
       post :create, :username => admin_user.login, :password => admin_user.password
       response.should redirect_to(dashboard_url)
+      controller.should be_logged_in
     end
 
     describe "on failure" do
@@ -29,6 +30,27 @@ describe SessionsController do
         post :create, :username => "bad", :password => "password"
         flash[:error].should_not be_blank
       end
+    end
+  end
+
+  describe "DELETE /sessions" do
+    before(:each) do
+      log_in admin_user
+    end
+    
+    it "should log the current user out" do
+      delete :destroy
+      controller.should_not be_logged_in
+    end
+
+    it "should redirect to the login page" do
+      delete :destroy
+      response.should redirect_to(login_path)
+    end
+
+    it "should flash a success message" do
+      delete :destroy
+      flash[:success].should_not be_blank
     end
   end
 end

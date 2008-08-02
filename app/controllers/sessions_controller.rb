@@ -8,4 +8,10 @@ class SessionsController < ApplicationController
       render :action => "new"
     end
   end
+
+  def destroy
+    self.current_user = nil
+    flash[:success] = "You have been logged out"
+    redirect_to login_url
+  end
 end
