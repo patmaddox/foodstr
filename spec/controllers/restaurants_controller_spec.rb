@@ -19,6 +19,10 @@ describe RestaurantsController do
   end
 
   describe "GET /restaurants/new" do
+    before(:each) do
+      log_in admin_user
+    end
+    
     it "should be ok" do
       get :new
       response.should be_success
@@ -32,6 +36,18 @@ describe RestaurantsController do
     it "should assign a restaurant object to the view" do
       get :new
       assigns[:restaurant].should_not be_nil
+    end
+
+    it "should require user to be logged in" do
+      log_in nil
+      get :new
+      response.should redirect_to(login_url)
+    end
+
+    it "should require user to be able to create restaurants" do
+      admin_user.stub!(:can_create_restaurants?).and_return false
+      get :new
+      response.should redirect_to(login_url)
     end
   end
 
@@ -64,6 +80,10 @@ describe RestaurantsController do
   end
 
   describe "POST /restaurants" do
+    before(:each) do
+      log_in admin_user
+    end
+    
     def do_post(attributes=valid_restaurant_attributes)
       post :create, :restaurant => attributes
     end
@@ -85,5 +105,18 @@ describe RestaurantsController do
       response.should render_template("new")
       assigns[:restaurant].should_not be_nil
     end
+
+    it "should require user to be logged in" do
+      log_in nil
+      get :new
+      response.should redirect_to(login_url)
+    end
+
+    it "should require user to be able to create restaurants" do
+      admin_user.stub!(:can_create_restaurants?).and_return false
+      get :new
+      response.should redirect_to(login_url)
+    end
+
   end
 end

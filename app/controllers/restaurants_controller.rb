@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  before_filter :login_required, :except => [:index, :show]
+  
   def index
     @restaurants = Restaurant.find :all
   end
@@ -18,5 +20,10 @@ class RestaurantsController < ApplicationController
     else
       render :action => "new"
     end
+  end
+
+  private
+  def authorized?
+    current_user.can_create_restaurants?
   end
 end

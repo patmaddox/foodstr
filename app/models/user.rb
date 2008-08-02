@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   def can_create_menu_items?
     true
   end
+
+  def can_create_restaurants?
+    true
+  end
 end
