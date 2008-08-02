@@ -6,4 +6,8 @@ class MenuItem < ActiveRecord::Base
       find_by_user_id user.id
     end
   end
+
+  def points
+    ratings.sum(:rating) || 0
+  end
 end

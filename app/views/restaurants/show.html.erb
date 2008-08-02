@@ -11,7 +11,7 @@
 
 <% @restaurant.menu_items.each do |menu_item| %>
   <div id="menu_item_<%= menu_item.id %>" class="menu_item">
-    <%= link_to h(menu_item.name), "#" %>
+    <%= link_to h(menu_item.name), "#" %> (<%= menu_item.points %> bites)
 
     <div class="feedback">
       <p>Leave some feedback!</p>
