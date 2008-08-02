@@ -7,7 +7,7 @@ describe Restaurant do
 
   [:name, :address_street, :address_city, :address_state, :address_zip].each do |required_attribute|
     it "should require #{required_attribute}" do
-      Restaurant.new(valid_restaurant_attributes.except(required_attribute)).should_not be_valid
+      Restaurant.new(valid_restaurant_attributes.merge(required_attribute => nil)).should_not be_valid
     end
   end
 end

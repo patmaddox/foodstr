@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080802074446) do
+ActiveRecord::Schema.define(:version => 20080802194749) do
 
   create_table "menu_items", :force => true do |t|
     t.integer  "restaurant_id"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20080802074446) do
     t.string   "name"
     t.string   "address_street"
     t.string   "address_street2"
-    t.string   "address_city"
-    t.string   "address_state"
+    t.string   "address_city",    :default => "New York"
+    t.string   "address_state",   :default => "NY"
     t.string   "address_zip"
     t.string   "website"
     t.datetime "created_at"
