@@ -5,14 +5,30 @@
   </head>
 
   <body>
-    <% [:success, :error, :notice].each do |message| %>
-      <% if flash[message] %>
-        <div class="flash_<%= message %>">
-          <%= flash[message] %>
-        </div>
-      <% end %>
-    <% end %>
+    <div id="header">
+      <%= link_to image_tag("small_ugly_logo.png", :id => "logo"), homepage_url %>
+      
+      <div id="account_links">
+        <% if logged_in? %>
+          Welcome, <%= current_user.first_name %>!
+          <%= link_to "My Dashboard", dashboard_url %>
+          <%= link_to "Log out", logout_url %>
+        <% else %>
+          <%= link_to "Login/Signup", login_url %>
+        <% end %>
+    </div>
+    </div>
 
-    <%= yield %>
+    <div id="content">
+      <% [:success, :error, :notice].each do |message| %>
+        <% if flash[message] %>
+          <div class="flash_<%= message %>">
+            <%= flash[message] %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

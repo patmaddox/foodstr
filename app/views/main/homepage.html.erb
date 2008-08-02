@@ -1,2 +1,11 @@
 <h1>Foodstr</h1>
-<p>Check me out!</h1>
+<p>We're going to rule the world (and have some damn good food
+in the process)</p>
+
+<p>
+  <% if logged_in? %>
+    <%= link_to "My Dashboard", dashboard_url %>
+  <% else %>
+    <%= link_to "Log in", login_url %>
+  <% end %>
+</p>

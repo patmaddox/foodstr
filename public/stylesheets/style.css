@@ -9,3 +9,11 @@
 .flash_notice {
     color: yellow;
 }
+
+#header {
+    border-bottom: 3px solid lightgray;
+}
+
+#account_links {
+    float: right;
+}
