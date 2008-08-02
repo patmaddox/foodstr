@@ -14,9 +14,9 @@ end
 require File.expand_path(File.join(File.dirname(__FILE__), 'matchers', 'render_widget'))
 
 Spec::Rails::Example::RailsExampleGroup.class_eval do
-  def create_user
-    User.create!(:first_name => "Pat", :last_name => "Maddox", :login => "pat",
-                 :email => "pat@patmaddox.com", :password => "password")
+  def create_user(options = {})
+    User.create!({:first_name => "Pat", :last_name => "Maddox", :login => "pat",
+                 :email => "pat@patmaddox.com", :password => "password"}.merge(options))
   end
 
   def valid_restaurant_attributes
@@ -27,6 +27,10 @@ Spec::Rails::Example::RailsExampleGroup.class_eval do
       :address_state => "NY",
       :address_zip => "10003"
     }    
+  end
+
+  def create_restaurant(options = {})
+    Restaurant.create! valid_restaurant_attributes.merge(options)
   end
 
   def admin_user

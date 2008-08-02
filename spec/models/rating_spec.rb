@@ -30,4 +30,15 @@ describe Rating do
     Rating.new(@valid_attributes.merge(:rating => -2)).should_not be_valid
     Rating.new(@valid_attributes.merge(:rating => nil)).should_not be_valid
   end
+
+  it "should only allow a user to create one rating for a menu item" do
+    pat = create_user :login => "pat"
+    sam = create_user :login => "sam"
+    rest = create_restaurant
+    item = MenuItem.create! :name => "pasta carbonara", :restaurant => rest
+
+    Rating.create! :user => pat, :menu_item => item
+    Rating.new(:user => pat, :menu_item => item).should_not be_valid
+    Rating.new(:user => sam, :menu_item => item).should be_valid
+  end
 end
