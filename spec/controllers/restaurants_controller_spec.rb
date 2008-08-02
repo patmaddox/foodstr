@@ -37,12 +37,13 @@ describe RestaurantsController do
 
   describe "GET /restaurants/1" do
     before(:each) do
-      @restaurant = stub_model(Restaurant)
-      Restaurant.stub!(:find).and_return @restaurant
+      @restaurant = Restaurant.create! valid_restaurant_attributes
+      @restaurant.menu_items.create! :name => "Pasta carbonara"
+      @restaurant.menu_items.create! :name => "Tiramisu"
     end
     
     def do_get
-      get :show, :id => "1"
+      get :show, :id => @restaurant.to_param
     end
     
     it "should be ok" do
@@ -55,10 +56,10 @@ describe RestaurantsController do
       response.should render_template("show")
     end
 
-    it "should find the restaurant and assign it to the view" do
-      Restaurant.should_receive(:find).with("1").and_return @restaurant
+    it "should show the names of the items on the page" do
       do_get
-      assigns[:restaurant].should == @restaurant
+      response.body.should include("Pasta carbonara")
+      response.body.should include("Tiramisu")
     end
   end
 

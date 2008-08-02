@@ -1,9 +1,18 @@
 <html>
   <head>
     <title>Foodstr</title>
+    <%= stylesheet_link_tag "style" %>
   </head>
 
   <body>
+    <% [:success, :error, :notice].each do |message| %>
+      <% if flash[message] %>
+        <div class="flash_<%= message %>">
+          <%= flash[message] %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

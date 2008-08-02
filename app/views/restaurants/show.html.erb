@@ -8,3 +8,9 @@
   <%= h(@restaurant.address_city) %>, <%= h(@restaurant.address_state) %>
   <%= h(@restaurant.address_zip) %>
 </div>
+
+<% @restaurant.menu_items.each do |menu_item| %>
+  <div class="menu_item"><%= menu_item.name %></div>
+<% end %>
+
+<%= link_to "Add a menu item", new_restaurant_menu_item_path(@restaurant) %>
