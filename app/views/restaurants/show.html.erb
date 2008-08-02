@@ -13,4 +13,6 @@
   <div class="menu_item"><%= menu_item.name %></div>
 <% end %>
 
-<%= link_to "Add a menu item", new_restaurant_menu_item_path(@restaurant) %>
+<% if current_user.can_create_menu_items? %>
+  <%= link_to "Add a menu item", new_restaurant_menu_item_path(@restaurant) %>
+<% end %>

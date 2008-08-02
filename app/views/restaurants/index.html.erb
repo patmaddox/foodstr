@@ -14,3 +14,6 @@
   </div>
 <% end %>
 
+<% if current_user.can_create_restaurants? %>
+  <%= link_to "Create a restaurant", new_restaurant_url %>
+<% end %>
