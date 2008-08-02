@@ -1,7 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :restaurants do |restaurant|
-    restaurant.resources :menu_items
+    restaurant.resources :menu_items do |menu_items|
+      menu_items.resources :ratings
+    end
   end
   map.resource :sessions
   
