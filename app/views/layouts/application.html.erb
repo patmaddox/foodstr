@@ -9,9 +9,7 @@
   </head>
 
   <body>
-    <div id="header">
-      <%= link_to image_tag("small_ugly_logo.png", :id => "logo"), homepage_url %>
-      
+    <div id="header">      
       <div id="account_links">
         <% if logged_in? %>
           Welcome, <%= current_user.first_name %>!
@@ -20,7 +18,9 @@
         <% else %>
           <%= link_to "Login/Signup", login_url %>
         <% end %>
-    </div>
+      </div>
+
+      <%= link_to image_tag("small_ugly_logo.png", :id => "logo"), homepage_url %>      
     </div>
 
     <div id="content">
