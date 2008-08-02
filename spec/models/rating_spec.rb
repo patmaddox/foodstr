@@ -33,7 +33,7 @@ describe Rating do
 
   it "should only allow a user to create one rating for a menu item" do
     pat = create_user :login => "pat"
-    sam = create_user :login => "sam"
+    sam = create_user :login => "sam", :email => "sam@blah.com"
     rest = create_restaurant
     item = MenuItem.create! :name => "pasta carbonara", :restaurant => rest
 

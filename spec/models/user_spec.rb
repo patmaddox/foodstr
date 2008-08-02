@@ -13,6 +13,16 @@ describe User do
     end
   end
 
+  it "should not allow duplicate login names" do
+    create_user :login => "pat", :email => "pat@pat.com"
+    new_user(:login => "pat", :email => "bob@bob.com").should_not be_valid
+  end
+  
+  it "should not allow duplicate emails" do
+    create_user :email => "pat@pat.com", :login => "pat"
+    new_user(:email => "pat@pat.com", :login => "bob").should_not be_valid
+  end
+
   describe "User.authenticate" do
     before(:each) do
       @user = create_user
