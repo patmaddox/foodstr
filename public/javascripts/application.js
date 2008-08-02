@@ -3,7 +3,7 @@
 
 jQuery(document).ready(function() {
     jQuery('div.menu_item a').click(function() {
-        jQuery(this).siblings('div.feedback').show();
+        jQuery(this).siblings('div.feedback').toggle();
     });
 
     jQuery('div.feedback').bind('success', function() {
