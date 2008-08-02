@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe MenuItemsController do
   before(:each) do
+    log_in admin_user
     @restaurant = Restaurant.create! valid_restaurant_attributes
   end
 
@@ -51,6 +52,18 @@ describe MenuItemsController do
     it "should render the form on failure" do
       do_post :name => ""
       response.should render_template("new")
+    end
+
+    it "should require user to be logged in" do
+      log_in nil
+      do_post
+      response.should redirect_to(login_url)
+    end
+
+    it "should require user to be able to create recipes" do
+      admin_user.stub!(:can_create_menu_items?).and_return false
+      do_post
+      response.should redirect_to(login_url)
     end
   end
 end

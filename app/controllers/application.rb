@@ -14,10 +14,29 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   def login_required
-    redirect_to(login_url) unless logged_in?
+    redirect_to(login_url) unless logged_in? && authorized?
   end
 
   def logged_in?
-    false
+    !!current_user
+  end
+
+  def authorized?
+    true
+  end
+
+  def current_user=(user)
+    if user
+      @_current_user = user
+      session[:user_id] = user.id
+    else
+      @_current_user = nil
+      session[:user_id] = nil
+    end
+  end
+
+  def current_user
+    return if session[:user_id].nil?
+    @_current_user ||= User.find(session[:user_id])
   end
 end

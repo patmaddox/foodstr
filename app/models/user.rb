@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     find_by_login_and_password login, password
   end
 
-  def dom_id
-    1
+  def can_create_menu_items?
+    true
   end
 end

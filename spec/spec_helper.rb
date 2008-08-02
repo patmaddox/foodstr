@@ -28,8 +28,16 @@ Spec::Rails::Example::RailsExampleGroup.class_eval do
       :address_zip => "10003"
     }    
   end
+
+  def admin_user
+    @_admin_user ||= create_user
+  end
 end
 
 Spec::Rails::Example::ControllerExampleGroup.class_eval do
   integrate_views
+
+  def log_in(user)
+    controller.send :current_user=, user
+  end
 end

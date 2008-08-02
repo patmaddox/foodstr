@@ -1,4 +1,5 @@
 class MenuItemsController < ApplicationController
+  before_filter :login_required
   before_filter :load_restaurant
   
   def new
@@ -18,5 +19,9 @@ class MenuItemsController < ApplicationController
   private
   def load_restaurant
     @restaurant = Restaurant.find params[:restaurant_id]
+  end
+
+  def authorized?
+    current_user.can_create_menu_items?
   end
 end
