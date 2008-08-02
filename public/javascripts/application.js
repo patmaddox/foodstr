@@ -7,7 +7,6 @@ jQuery(document).ready(function() {
     });
 
     jQuery('div.feedback').bind('success', function() {
-        var message = jQuery('<p>').attr('class', 'success').text('Thanks for your feedback!');
-        jQuery(this).find('p').after(message);
+        jQuery(this).find('p.response').addClass('success').text('Thanks for your feedback!').show().fadeOut(5000);
     });
 });

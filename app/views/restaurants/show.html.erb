@@ -15,6 +15,7 @@
 
     <div class="feedback">
       <p>Leave some feedback!</p>
+      <p class="response"></p>
       <% if logged_in? %>
         <% remote_form_for :rating,
              menu_item.ratings.from_user(current_user),
