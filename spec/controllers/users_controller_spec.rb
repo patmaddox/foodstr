@@ -34,6 +34,11 @@ describe UsersController do
       it "should create a user" do
         lambda { do_post }.should change(User, :count).by(1)
       end
+
+      it "should log the user in" do
+        do_post
+        controller.should be_logged_in
+      end
     end
 
     describe "failure" do
